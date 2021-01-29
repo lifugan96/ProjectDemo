@@ -1,10 +1,32 @@
 package com.glf.rxjavademo.fragment;
 
+import android.view.View;
+
 import com.glf.rxjavademo.R;
 import com.glf.rxjavademo.base.BaseFragment;
 
 public class NormalFragment extends BaseFragment {
 
+
+    @Override
+    protected void initView(View rootView) {
+
+    }
+
+    @Override
+    protected void relese() {
+
+    }
+
+    @Override
+    protected void initPresenter() {
+
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
 
     @Override
     protected int bindLayout() {

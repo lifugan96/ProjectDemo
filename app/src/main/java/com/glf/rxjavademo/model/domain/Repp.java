@@ -1,4 +1,4 @@
-package com.glf.rxjavademo.model;
+package com.glf.rxjavademo.model.domain;
 
 public class Repp {
 

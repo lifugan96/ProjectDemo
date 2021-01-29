@@ -1,9 +1,9 @@
-package com.glf.rxjavademo.app;
+package com.glf.rxjavademo.utils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitManager {
+public class RetrofitManagerUtil {
 
 //    private static Retrofit retrofit = new Retrofit.Builder()
 //            .baseUrl("http://47.99.97.108:4008//WSReport.asmx/")

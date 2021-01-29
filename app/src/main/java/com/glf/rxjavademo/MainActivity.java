@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.glf.rxjavademo.app.Api;
+import com.glf.rxjavademo.model.Api;
 import com.glf.rxjavademo.fragment.HomeFragment;
 import com.glf.rxjavademo.fragment.NormalFragment;
 import com.glf.rxjavademo.fragment.RedPacketFragment;
