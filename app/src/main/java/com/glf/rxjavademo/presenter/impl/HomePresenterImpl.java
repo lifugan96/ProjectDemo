@@ -7,6 +7,8 @@ import com.glf.rxjavademo.utils.LogUtils;
 import com.glf.rxjavademo.utils.RetrofitManager;
 import com.glf.rxjavademo.view.IHomeCallBack;
 
+import java.net.HttpURLConnection;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,6 +20,9 @@ public class HomePresenterImpl implements IHomePresenter {
 
     @Override
     public void getCategories() {
+        if (mCallback != null) {
+            mCallback.onLoading();
+        }
         Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
         Api api = retrofit.create(Api.class);
         Call<Categories> categories = api.getCategories();
@@ -26,14 +31,26 @@ public class HomePresenterImpl implements IHomePresenter {
             public void onResponse(Call<Categories> call, Response<Categories> response) {
                 Categories categories = response.body();
                 LogUtils.d(HomePresenterImpl.this, "response--->" + categories.toString());
-                if (mCallback != null) {
-                    mCallback.onCategoriesLoaded(categories);
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    if (mCallback != null) {
+                        if (categories == null || categories.getData().size() == 0) {
+                            mCallback.onEmpty();
+                        } else {
+                            mCallback.onCategoriesLoaded(categories);
+                        }
+                    }
+                } else {
+                    if (mCallback != null) {
+                        mCallback.onError();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Categories> call, Throwable t) {
-
+                if (mCallback != null) {
+                    mCallback.onError();
+                }
             }
         });
 

@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 
-public class HomePagerFragment extends BaseFragment implements IHomeCallBack {
+public class HomePagerFragment extends BaseFragment {
 
 
     @Override
@@ -45,8 +45,4 @@ public class HomePagerFragment extends BaseFragment implements IHomeCallBack {
 
     }
 
-    @Override
-    public void onCategoriesLoaded(Categories categories) {
-
-    }
 }

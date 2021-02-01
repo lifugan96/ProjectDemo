@@ -14,7 +14,6 @@ import com.glf.rxjavademo.view.IHomeCallBack;
 import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements IHomeCallBack {
 
@@ -43,12 +42,10 @@ public class HomeFragment extends BaseFragment implements IHomeCallBack {
     @Override
     protected void loadData() {
         mHomePresenter.getCategories();
-
     }
 
     @Override
     protected void initView(View rootView) {
-
         mTableLayout.setupWithViewPager(mViewPager);
         mHomePagerAdapter = new HomePagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mHomePagerAdapter);
@@ -58,14 +55,36 @@ public class HomeFragment extends BaseFragment implements IHomeCallBack {
     protected void relese() {
         if (null != mHomePresenter) {
             mHomePresenter.unregisterCallback(this);
-
         }
     }
 
     @Override
     public void onCategoriesLoaded(Categories categories) {
+        setUpState(State.SUCCESS);
         if (null != mHomePagerAdapter) {
             mHomePagerAdapter.setCategories(categories);
         }
+    }
+
+    @Override
+    protected void onRetryNetWorkClick() {
+        if (null != mHomePresenter) {
+            mHomePresenter.getCategories();
+        }
+    }
+
+    @Override
+    public void onError() {
+        setUpState(State.ERROR);
+    }
+
+    @Override
+    public void onLoading() {
+        setUpState(State.LOADING);
+    }
+
+    @Override
+    public void onEmpty() {
+        setUpState(State.EMPTY);
     }
 }
