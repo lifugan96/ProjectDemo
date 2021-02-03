@@ -3,7 +3,6 @@ package com.glf.rxjavademo.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,15 +12,14 @@ import com.glf.rxjavademo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * 修改注释位置即可 套用
  */
 public class RecyclerViewDemoAdapter extends RecyclerView.Adapter<RecyclerViewDemoAdapter.ViewHolder> {
 
+    //存数据的集合
     List<Object> mObjectList = new ArrayList<>();
+    private OnItemClickListener mOnItemClickListener;
 
 
     @NonNull
@@ -34,6 +32,15 @@ public class RecyclerViewDemoAdapter extends RecyclerView.Adapter<RecyclerViewDe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setData(mObjectList.get(position));
+        //绑定点击事件
+        if (null != mOnItemClickListener) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemCLick(mObjectList.get(position));
+                }
+            });
+        }
     }
 
     @Override
@@ -53,13 +60,25 @@ public class RecyclerViewDemoAdapter extends RecyclerView.Adapter<RecyclerViewDe
 
         public void setData(Object o) {
 //            title.setText(o.getTile());
-
         }
     }
 
+    //设置数据
     public void setData(List<Object> objectList) {
         mObjectList.clear();
         mObjectList.addAll(objectList);
         notifyDataSetChanged();
+    }
+
+    //设置回调点击事件
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+    /**
+     * 定义点击事件回调接口
+     */
+    public interface OnItemClickListener {
+        void onItemCLick(Object object);
     }
 }

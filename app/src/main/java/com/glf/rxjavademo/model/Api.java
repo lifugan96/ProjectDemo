@@ -1,6 +1,8 @@
 package com.glf.rxjavademo.model;
 
 import com.glf.rxjavademo.model.domain.Categories;
+import com.glf.rxjavademo.model.domain.NormalCategory;
+import com.glf.rxjavademo.model.domain.NormalContent;
 import com.glf.rxjavademo.model.domain.PostFileRequest;
 import com.glf.rxjavademo.model.domain.Repp;
 import com.glf.rxjavademo.model.domain.ResultInfo;
@@ -64,4 +66,11 @@ public interface Api {
 
     @GET("discovery/categories")
     Call<Categories> getCategories();
+
+
+    @GET("recommend/categories")
+    Call<NormalCategory> getNormalCategory();
+
+    @GET("recommend/categoryId")
+    Call<NormalContent> getNormalContent(@Query("categoryId") int categoryId);
 }
